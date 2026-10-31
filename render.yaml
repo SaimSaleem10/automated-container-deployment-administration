@@ -1,0 +1,47 @@
+# Render Blueprint: deploys CareerOS AI (Claude-powered) with its own Postgres.
+# Render dashboard → New → Blueprint → pick this repository.
+services:
+  - type: web
+    name: careeros
+    runtime: docker
+    plan: free            # free instances sleep after 15 min idle; "starter" keeps it always on
+    region: frankfurt
+    healthCheckPath: /healthz
+    autoDeploy: true
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: careeros-db
+          property: connectionString
+      - key: ANTHROPIC_API_KEY
+        sync: false        # Render asks you for this once, during setup
+      - key: PII_ENCRYPTION_KEY
+        generateValue: true  # 32 random bytes, base64. Keep it: it decrypts your saved settings and login.
+      - key: EXTENSION_JWT_SECRET
+        generateValue: true
+      - key: EXTENSION_API_TOKEN
+        generateValue: true
+      - key: APP_ENV
+        value: prod
+      - key: APP_LOG_LEVEL
+        value: INFO
+      - key: MONTHLY_BUDGET_EUR
+        value: "10.00"
+      - key: PER_WORKFLOW_BUDGET_EUR
+        value: "0.30"
+      - key: LANGSMITH_TRACING
+        value: "false"
+      # Optional free job-feed keys. Add them later in the Render dashboard or the app's Settings page.
+      - key: ADZUNA_APP_ID
+        sync: false
+      - key: ADZUNA_APP_KEY
+        sync: false
+      - key: REED_API_KEY
+        sync: false
+
+databases:
+  - name: careeros-db
+    databaseName: careeros
+    user: careeros
+    plan: free
+    region: frankfurt

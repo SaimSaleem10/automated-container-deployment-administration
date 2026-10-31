@@ -1,0 +1,88 @@
+# Profile for an entry-level cybersecurity job search in Ireland.
+# The Docker image copies this to config/profile.yml when no profile.yml exists.
+# Edit the candidate block and config/cv.md, commit, and Render redeploys.
+default_country: "ie"
+
+candidate:
+  display_name: "Your Name"            # EDIT: your full name
+  email: "you@example.com"             # EDIT: hashed only, never sent to the LLM
+  phone: ""                            # EDIT: used only to redact your number from text
+  full_names:
+    - "Your Name"                      # EDIT: name variants to redact before Claude sees text
+  location: "Dublin, Ireland"
+  work_authorisation: ""               # EDIT: e.g. "Stamp 1G" or "EU citizen". Left blank, it isn't mentioned.
+
+cv_path: "config/cv.md"
+
+profiles:
+  linkedin_url: "https://www.linkedin.com/in/your-handle/"   # EDIT
+  indeed_url: "https://profile.indeed.com/?hl=en_IE&co=IE"
+
+cover_letter:
+  tone: "concise, evidence-led, graduate-level, Irish/UK spelling"
+  must_mention: []
+  forbid_phrases:
+    - "I am passionate about"
+    - "synergy"
+    - "rockstar"
+
+target_titles:
+  primary:
+    - "Junior Security Analyst"
+    - "Graduate Cyber Security"
+    - "SOC Analyst"
+    - "Identity and Access Management"
+  secondary:
+    - "GRC Analyst"
+    - "IT Risk and Compliance"
+    - "Microsoft 365 Administrator"
+
+keywords:
+  must_have: []
+  nice_to_have:
+    - "Entra ID"
+    - "Azure AD"
+    - "Microsoft 365"
+    - "Conditional Access"
+    - "Intune"
+    - "Purview"
+    - "ISO 27001"
+    - "NIST"
+    - "GDPR"
+    - "governance"
+    - "policy"
+    - "graduate"
+    - "junior"
+    - "entry level"
+
+red_flags:
+  - "unpaid"
+  - "equity only"
+  - "10+ years"
+  - "8+ years"
+  - "5+ years"
+  - "senior"
+  - "principal"
+  - "head of"
+
+locations:
+  - name: "Dublin, Ireland"
+    country: "ie"
+  - name: "Cork, Ireland"
+    country: "ie"
+  - name: "Galway, Ireland"
+    country: "ie"
+  - name: "Limerick, Ireland"
+    country: "ie"
+
+sources:
+  adzuna:
+    enabled: true
+    results_per_page: 50
+    max_pages: 2
+    max_age_days: 14
+  reed:
+    enabled: true
+    results_per_page: 100
+    max_pages: 1
+    max_age_days: 14

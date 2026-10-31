@@ -1,0 +1,62 @@
+# CareerOS AI — local development stack.
+#
+# Runs the FastAPI app in a container that mounts the source tree so any
+# edit to app/, config/, or evals/ triggers uvicorn --reload inside the
+# container. The container talks to the Postgres already running on your
+# host machine (postgres:admin123@host.docker.internal:5432/careeros) so
+# your existing captures and migrations persist across container restarts.
+#
+# Usage:
+#   docker compose up -d         # start in background
+#   docker compose logs -f app   # follow logs
+#   docker compose restart app   # rare — only needed if you touch .env
+#   docker compose down          # stop everything
+#
+# If you want a fully self-contained stack (Postgres in a container too),
+# see docker-compose.full.yml — not enabled by default to avoid losing
+# your existing host-Postgres data.
+
+services:
+  app:
+    build: .
+    image: careeros-app:dev
+    container_name: careeros-app
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      # Override DATABASE_URL so the container talks to your host Postgres
+      # via Docker's special hostname. .env keeps the localhost form for
+      # native (non-container) runs.
+      DATABASE_URL: postgresql+asyncpg://postgres:admin123@host.docker.internal:5432/careeros
+      APP_LOG_LEVEL: INFO
+      PYTHONUNBUFFERED: "1"
+    ports:
+      - "8000:8000"
+    extra_hosts:
+      # Lets `host.docker.internal` resolve on Linux too (already works on macOS/Windows).
+      - "host.docker.internal:host-gateway"
+    volumes:
+      # Mount source tree so uvicorn --reload picks up edits instantly.
+      - ./app:/srv/app
+      - ./evals:/srv/evals
+      - ./config:/srv/config
+      - ./data:/srv/data
+      - ./alembic.ini:/srv/alembic.ini:ro
+      # Bind-mount .env so the auto-generated PII_ENCRYPTION_KEY persists across
+      # restarts (otherwise the container regenerates the key every boot, which
+      # invalidates anything encrypted with the old one — notably the auth hash).
+      - ./.env:/srv/.env
+    command:
+      [
+        "uvicorn", "app.main:app",
+        "--host", "0.0.0.0",
+        "--port", "8000",
+        "--reload",
+        "--reload-dir", "/srv/app"
+      ]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/healthz').read()"]
+      interval: 10s
+      timeout: 4s
+      retries: 5
+      start_period: 15s

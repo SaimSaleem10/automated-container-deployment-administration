@@ -1,0 +1,88 @@
+# User profile config — copy to profile.yml and fill in your details.
+# profile.yml is gitignored.
+#
+# =====================================================================
+# COUNTRY / GEOGRAPHY  ← THIS IS THE ONE KNOB TO CHANGE FOR OTHER MARKETS
+# =====================================================================
+# CareerOS AI defaults to IRELAND (`ie`). Both scraper sources (Adzuna,
+# Reed) are configured below for the Irish market.
+#
+# To target a different country:
+#   1. Change `default_country` to the new ISO-2 code (e.g. "gb", "de").
+#   2. Replace the entries in `locations[]` with city names that match.
+#   3. Reed only covers UK + IE; if you switch to another country it
+#      will simply return zero results — leave it enabled or set
+#      sources.reed.enabled: false.
+#
+# Adzuna supported countries: ie, gb, us, de, fr, au, ca, nl, pl, in,
+#                             za, br, mx, nz, sg.
+default_country: "ie"
+
+candidate:
+  display_name: "Your Name"
+  email: "you@example.com"             # used for hashing into users.email_hash; never sent to LLMs
+  phone: "+353 XX XXX XXXX"            # only used for redaction matching
+  full_names:                          # redacted to [CANDIDATE_NAME] in JD text
+    - "Your Name"
+    - "Yourname"
+  location: "Dublin, Ireland"
+  work_authorisation: "Stamp 1G (Ireland) — eligible for Critical Skills Employment Permit"
+
+# Path to the canonical CV (markdown). Used by the profile node to compress into
+# a structured candidate_profile cached across applications.
+cv_path: "evals/fixtures/sample_cv.md"
+
+# External profiles. The Chrome extension companion (week 5) reads JD text from these
+# domains when you explicitly click "Send to CareerOS"; the system itself NEVER scrapes
+# LinkedIn or Indeed (their ToS forbids it).
+profiles:
+  linkedin_url: "https://www.linkedin.com/in/your-handle/"
+  indeed_url: "https://profile.indeed.com/?hl=en_IE&co=IE"
+
+cover_letter:
+  tone: "concise, evidence-led, Ireland-tuned"
+  must_mention:
+    - "work authorisation status"
+  forbid_phrases:
+    - "I am passionate about"
+    - "synergy"
+    - "rockstar"
+
+# What scrapers search for and how to post-filter discovered jobs.
+target_titles:
+  primary:                              # main search terms (used in queries)
+    - "AI Engineer"
+    - "ML Engineer"
+  secondary:                            # additional broad terms
+    - "Backend Engineer Python"
+
+keywords:
+  must_have:                            # included in scraper queries
+    - "Python"
+  nice_to_have:                         # boosts scoring, not required in query
+    - "AWS"
+    - "FastAPI"
+    - "LLM"
+
+red_flags:                              # discovered jobs containing any of these (case-insensitive) are dropped
+  - "unpaid"
+  - "equity only"
+  - "no sponsorship"
+
+# Where to search. Each entry maps to scraper-specific location keys.
+locations:
+  - name: "Dublin, Ireland"
+    country: "ie"
+
+# Scraper sources. Disable individually if rate-limited.
+sources:
+  adzuna:
+    enabled: true
+    results_per_page: 50
+    max_pages: 2          # 100 jobs per location per run
+    max_age_days: 14
+  reed:
+    enabled: true
+    results_per_page: 100
+    max_pages: 1
+    max_age_days: 14

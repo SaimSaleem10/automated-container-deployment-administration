@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CareerOS AI — Inbox</title>
+    <link rel="stylesheet" href="/ui/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1 class="serif">CareerOS AI <span class="muted">— Inbox</span></h1>
+      <nav class="topnav">
+        <a href="/ui/" class="navlink active">Inbox</a>
+        <a href="/ui/dashboard.html" class="navlink">Dashboard</a>
+        <a href="/ui/usage.html" class="navlink">Usage</a>
+        <a href="/ui/settings.html" class="navlink">Settings</a>
+      </nav>
+      <nav class="filters">
+        <label>
+          Status
+          <select id="filter-status">
+            <option value="all">all</option>
+            <option value="pending">pending</option>
+            <option value="scored">scored</option>
+            <option value="promoted">promoted</option>
+            <option value="filtered">filtered</option>
+            <option value="error">error</option>
+          </select>
+        </label>
+        <label>
+          Source
+          <select id="filter-source">
+            <option value="">all</option>
+            <option value="linkedin">linkedin</option>
+            <option value="indeed">indeed</option>
+            <option value="adzuna">adzuna</option>
+            <option value="reed">reed</option>
+          </select>
+        </label>
+        <button id="refresh" class="ghost" title="Reload list">↻</button>
+        <span id="count" class="muted small"></span>
+      </nav>
+    </header>
+
+    <main class="split">
+      <aside id="list" class="list" aria-label="Captured jobs">
+        <div class="empty">Loading…</div>
+      </aside>
+
+      <section id="detail" class="detail" aria-label="Job detail">
+        <div class="empty">Select a job to view details.</div>
+      </section>
+    </main>
+
+    <template id="row-template">
+      <button class="row" type="button">
+        <div class="row-head">
+          <span class="title"></span>
+          <span class="score"></span>
+        </div>
+        <div class="row-sub">
+          <span class="company"></span>
+          <span class="dot">·</span>
+          <span class="location"></span>
+        </div>
+        <div class="row-meta">
+          <span class="source-pill"></span>
+          <span class="status-pill"></span>
+          <span class="app-status-pill"></span>
+        </div>
+      </button>
+    </template>
+
+    <template id="detail-template">
+      <article class="job">
+        <header class="job-head">
+          <h2 class="job-title"></h2>
+          <div class="job-sub">
+            <span class="job-company"></span>
+            <span class="dot">·</span>
+            <span class="job-location"></span>
+          </div>
+          <div class="job-meta">
+            <a class="job-url" target="_blank" rel="noreferrer">Open original ↗</a>
+            <span class="job-source-pill"></span>
+            <span class="job-status-pill"></span>
+            <span class="job-app-status-pill big"></span>
+            <span class="job-captured muted small"></span>
+            <button class="ghost danger" data-action="delete-job" title="Delete this job from the inbox">Delete</button>
+          </div>
+        </header>
+
+        <section class="score-block">
+          <div class="score-row">
+            <div class="score-big">
+              <span class="score-num">—</span>
+              <span class="score-label muted small">fit</span>
+            </div>
+            <div class="decision-block">
+              <div class="decision-pill">—</div>
+              <p class="decision-reason muted"></p>
+            </div>
+            <div class="score-actions">
+              <button class="primary" data-action="score">Score now</button>
+            </div>
+          </div>
+          <div class="breakdown">
+            <h4>Breakdown</h4>
+            <div class="breakdown-bars"></div>
+          </div>
+        </section>
+
+        <section class="lifecycle">
+          <h3>Application</h3>
+          <p class="muted small">
+            All entry is manual — set the status as you go. The dashboard
+            (<a href="/ui/dashboard.html">Dashboard</a>) aggregates everything you record here.
+          </p>
+          <div class="lifecycle-row">
+            <label class="field">
+              Status
+              <select id="lifecycle-status">
+                <option value="">— not set —</option>
+                <option value="bookmarked">Bookmarked</option>
+                <option value="applied">Applied</option>
+                <option value="screening">Screening / recruiter call</option>
+                <option value="interview">Interview</option>
+                <option value="offer">Offer</option>
+                <option value="accepted">Accepted</option>
+                <option value="rejected">Rejected</option>
+                <option value="ghosted">Ghosted</option>
+                <option value="withdrawn">I withdrew</option>
+                <option value="not_applying">Decided not to apply</option>
+              </select>
+            </label>
+            <label class="field">
+              Applied date
+              <input id="lifecycle-applied-at" type="date" />
+            </label>
+          </div>
+          <label class="field stack">
+            Note (appended to history)
+            <textarea id="lifecycle-note" rows="2" placeholder="Recruiter said timeline is end of month; expecting follow-up."></textarea>
+          </label>
+          <div class="lifecycle-actions">
+            <button class="primary" data-action="save-status">Update status</button>
+            <span class="lifecycle-status-msg muted small"></span>
+          </div>
+          <details class="status-history-block">
+            <summary>Status history (<span class="status-history-count">0</span>)</summary>
+            <ul class="status-history-list"></ul>
+          </details>
+        </section>
+
+        <section class="research">
+          <header class="research-head">
+            <h3>About this company</h3>
+            <div class="research-meta muted small">
+              <span class="research-state-pill" data-state="">No brief yet</span>
+              <span class="research-cost"></span>
+            </div>
+          </header>
+          <p class="muted small">
+            Runs an agentic loop (plan → web search / fetch → synthesize) to build
+            a grounded company brief from public sources. Trace shows the agent's
+            actual reasoning steps.
+          </p>
+          <div id="research-actions" class="research-actions">
+            <button class="primary" data-action="research-go">Research company</button>
+            <span class="research-status muted small"></span>
+          </div>
+          <div id="research-trace-block" class="research-trace-block" style="display:none">
+            <h4>Agent trace</h4>
+            <ul id="research-trace" class="research-trace-list"></ul>
+          </div>
+          <div id="research-brief-block" class="research-brief-block" style="display:none">
+            <article class="brief">
+              <p class="brief-summary"></p>
+              <div class="brief-grid">
+                <section class="brief-col">
+                  <h4>What they do</h4>
+                  <p class="brief-what"></p>
+                </section>
+                <section class="brief-col">
+                  <h4>Tech stack signals</h4>
+                  <ul class="brief-tech"></ul>
+                </section>
+              </div>
+              <section class="brief-section">
+                <h4>Recent news</h4>
+                <ul class="brief-news"></ul>
+              </section>
+              <section class="brief-section">
+                <h4>Culture signals</h4>
+                <ul class="brief-culture"></ul>
+              </section>
+              <section class="brief-section brief-red-flags" style="display:none">
+                <h4>Red flags</h4>
+                <ul class="brief-flags"></ul>
+              </section>
+              <section class="brief-section">
+                <h4>Sources</h4>
+                <ol class="brief-sources"></ol>
+              </section>
+            </article>
+          </div>
+        </section>
+
+        <section class="cover-letter">
+          <header class="cover-letter-head">
+            <h3>Cover letter</h3>
+            <div class="cover-letter-meta muted small">
+              <span class="cl-state-pill" data-state="">No draft yet</span>
+              <span class="cl-cost"></span>
+            </div>
+          </header>
+          <p class="muted small">
+            Click <em>Generate</em> to stream a fresh draft from the matcher's score
+            context. Edit inline, then save as a draft or approve.
+          </p>
+          <textarea
+            id="cl-text"
+            rows="14"
+            placeholder="Generate a draft to see streamed output here, then edit before saving."
+          ></textarea>
+          <div class="cl-bullets-block">
+            <h4>Tailored bullets</h4>
+            <ul id="cl-bullets" class="cl-bullets-list">
+              <li class="muted small empty-row">No bullets yet.</li>
+            </ul>
+          </div>
+          <div class="cover-letter-actions">
+            <button class="primary" data-action="cl-generate">Generate</button>
+            <button class="ghost" data-action="cl-regenerate" disabled>Regenerate</button>
+            <button class="ghost" data-action="cl-save">Save draft</button>
+            <button class="primary" data-action="cl-approve">Approve &amp; save</button>
+            <button class="ghost" data-action="cl-unapprove" disabled>Unapprove</button>
+            <span class="cl-status muted small"></span>
+          </div>
+        </section>
+
+        <section class="feedback">
+          <h3>Your feedback</h3>
+          <p class="muted small">
+            What you record here informs prompt tuning. Override the score / decision if
+            the system got it wrong.
+          </p>
+          <div class="feedback-row">
+            <div class="thumbs">
+              <button data-thumb="up" class="thumb">👍</button>
+              <button data-thumb="down" class="thumb">👎</button>
+            </div>
+            <label class="field">
+              Correct score
+              <input type="number" min="0" max="100" data-field="score_correction" />
+            </label>
+            <label class="field">
+              Override decision
+              <select data-field="decision_override">
+                <option value="">— no override —</option>
+                <option value="apply">apply</option>
+                <option value="maybe">maybe</option>
+                <option value="skip">skip</option>
+              </select>
+            </label>
+          </div>
+          <label class="field stack">
+            Notes
+            <textarea data-field="notes" rows="3" placeholder="What was right or wrong about the scoring? Anything unusual about the role?"></textarea>
+          </label>
+          <div class="feedback-actions">
+            <button class="primary" data-action="save-feedback">Save feedback</button>
+            <span class="feedback-status muted small"></span>
+          </div>
+        </section>
+
+        <section class="parsed">
+          <details>
+            <summary>Parsed JD (model output)</summary>
+            <pre class="parsed-json muted small"></pre>
+          </details>
+        </section>
+
+        <section class="raw">
+          <details>
+            <summary>Full description</summary>
+            <pre class="raw-text"></pre>
+          </details>
+        </section>
+      </article>
+    </template>
+
+    <script src="/ui/main.js"></script>
+  </body>
+</html>
