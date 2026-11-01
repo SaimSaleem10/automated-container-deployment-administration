@@ -35,7 +35,7 @@ This repository is [CareerOS AI](https://github.com/naeemhassan09/CareerOS-AI) (
 | **Adzuna** (aggregates Indeed-style listings in Ireland) | Free key at https://developer.adzuna.com → add `ADZUNA_APP_ID` / `ADZUNA_APP_KEY` in Render or the app's Settings page → **Discover** in the app |
 | **Reed** (UK and Ireland) | Free key at https://www.reed.co.uk/developers → `REED_API_KEY` |
 | **LinkedIn** | LinkedIn offers no job-search API to personal apps. Use the Chrome extension in `extension/` on a laptop ("Send to CareerOS" on a LinkedIn job page), or paste the job description into the app's inbox from your phone. |
-| **Indeed** | Same as LinkedIn: the Chrome extension or paste. Indeed's own search is available live in the Cyber Job Radar page (`web/cyber-job-radar.html`) through Claude's Indeed connector. |
+| **Indeed** | Same as LinkedIn: the Chrome extension or paste. Indeed's own search is available live in the private Cyber Job Radar page (a Claude artifact, kept out of this public repo because it holds your CV) through Claude's Indeed connector. |
 
 The app never applies, emails or messages anyone on your behalf.
 

@@ -48,3 +48,6 @@ config/profile.yml
 
 # Claude Code per-machine permission allowlist (auto-mutates; user-local)
 .claude/settings.local.json
+
+# Personal job page (holds the CV); published as a private Claude artifact, not committed
+web/cyber-job-radar.html
