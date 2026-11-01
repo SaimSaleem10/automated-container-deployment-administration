@@ -1,6 +1,6 @@
 # Deploying CareerOS on Render (Claude-powered)
 
-This repository is [CareerOS AI](https://github.com/naeemhassan09/CareerOS-AI) (PolyForm Noncommercial licence, see `LICENSE` and `NOTICE`), set up for an **entry-level cybersecurity job search in Ireland**, running on **Claude only**.
+This repository is [CareerOS AI](https://github.com/naeemhassan09/CareerOS-AI) (PolyForm Noncommercial licence, see `LICENSE` and `NOTICE`), set up for an **entry-level cybersecurity GRC (governance, risk and compliance) job search in Ireland**, running on **Claude only**.
 
 ## What changed from upstream
 
@@ -8,7 +8,7 @@ This repository is [CareerOS AI](https://github.com/naeemhassan09/CareerOS-AI) (
 |---|---|
 | Every LLM task routes to Claude (Haiku for scoring/parsing, Sonnet for CV profile and cover letters); no OpenAI key needed | `app/llm/router.py` |
 | Accepts Render's `postgres://` database URL | `app/config.py` |
-| Cybersecurity profile: junior security, SOC, IAM/Entra, GRC titles; Irish cities; senior roles filtered out | `config/profile.cyber.yml` |
+| GRC profile: GRC, IT risk, compliance, third-party risk and data protection titles (junior security as a backup); Irish cities; senior roles filtered out | `config/profile.cyber.yml` |
 | CV template to fill in | `config/cv.md` |
 | Container runs migrations on start and listens on `$PORT` | `Dockerfile` |
 | One-click Render Blueprint (app and Postgres) | `render.yaml` |

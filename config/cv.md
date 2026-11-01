@@ -1,13 +1,13 @@
 # [CANDIDATE_NAME]
 
-Graduate, Cybersecurity / Information Technology. Entry-level security analyst candidate.
+Graduate, Cybersecurity / Information Technology. Entry-level GRC (governance, risk and compliance) candidate.
 Dublin, Ireland | [EMAIL] | [PHONE] | LinkedIn: [in/<handle>]
 
 <!-- EDIT THIS FILE: replace the bracketed parts with your real details. Claude only uses what is written here. -->
 
 ## Summary
 
-Recent graduate looking for an entry-level cybersecurity role. Hands-on experience administering Microsoft Entra ID and Microsoft 365 tenants, plus security governance and policy work.
+Recent graduate looking for an entry-level cybersecurity governance, risk and compliance role. Security policy and governance experience, backed by hands-on administration of the Microsoft Entra ID and Microsoft 365 controls those policies govern.
 
 ## Education
 
@@ -28,8 +28,8 @@ Recent graduate looking for an entry-level cybersecurity role. Hands-on experien
 
 ## Skills
 
-Microsoft Entra ID, Microsoft 365 administration, identity and access management, security policy and governance, [add: SIEM, Windows event logs, networking basics, PowerShell, Python]
+Security policy and governance, risk assessment, access reviews, [frameworks you have used: ISO 27001, NIST CSF, GDPR], Microsoft Entra ID, Microsoft 365 administration, Excel reporting
 
 ## Certifications
 
-[e.g. Microsoft SC-900, CompTIA Security+, ISC2 CC. Add any you hold or are studying for.]
+[e.g. ISC2 CC, Microsoft SC-900, ISO 27001 Foundation, CompTIA Security+. Add any you hold or are studying for.]

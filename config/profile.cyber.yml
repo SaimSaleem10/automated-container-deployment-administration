@@ -1,4 +1,4 @@
-# Profile for an entry-level cybersecurity job search in Ireland.
+# Profile for an entry-level cybersecurity GRC (governance, risk and compliance) job search in Ireland.
 # The Docker image copies this to config/profile.yml when no profile.yml exists.
 # Edit the candidate block and config/cv.md, commit, and Render redeploys.
 default_country: "ie"
@@ -19,7 +19,7 @@ profiles:
   indeed_url: "https://profile.indeed.com/?hl=en_IE&co=IE"
 
 cover_letter:
-  tone: "concise, evidence-led, graduate-level, Irish/UK spelling"
+  tone: "concise, evidence-led, graduate-level GRC candidate, Irish/UK spelling"
   must_mention: []
   forbid_phrases:
     - "I am passionate about"
@@ -28,29 +28,34 @@ cover_letter:
 
 target_titles:
   primary:
-    - "Junior Security Analyst"
-    - "Graduate Cyber Security"
-    - "SOC Analyst"
-    - "Identity and Access Management"
-  secondary:
     - "GRC Analyst"
-    - "IT Risk and Compliance"
-    - "Microsoft 365 Administrator"
+    - "IT Risk Analyst"
+    - "Compliance Analyst"
+    - "Information Security Compliance"
+  secondary:
+    - "Third Party Risk Analyst"
+    - "Data Protection Analyst"
+    - "Risk and Compliance Graduate"
+    - "Junior Security Analyst"
 
 keywords:
   must_have: []
   nice_to_have:
-    - "Entra ID"
-    - "Azure AD"
-    - "Microsoft 365"
-    - "Conditional Access"
-    - "Intune"
-    - "Purview"
+    - "GRC"
+    - "governance"
+    - "risk assessment"
+    - "controls"
+    - "policy"
+    - "audit"
     - "ISO 27001"
     - "NIST"
     - "GDPR"
-    - "governance"
-    - "policy"
+    - "NIS2"
+    - "DORA"
+    - "third party risk"
+    - "Entra ID"
+    - "Microsoft 365"
+    - "Purview"
     - "graduate"
     - "junior"
     - "entry level"

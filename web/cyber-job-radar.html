@@ -64,13 +64,13 @@ textarea{width:100%;min-height:120px;font:inherit;font-size:.92rem;border:1px so
 
 <div class="wrap">
   <header>
-    <p class="mono" style="color:var(--accent);margin:0">ENTRY-LEVEL · CYBERSECURITY · IRELAND</p>
+    <p class="mono" style="color:var(--accent);margin:0">ENTRY-LEVEL · CYBER GRC · IRELAND</p>
     <h1>Cyber Job Radar</h1>
-    <p class="sub">Roles that suit a new graduate with Microsoft Entra, Microsoft 365 tenant, and governance and policy experience.</p>
+    <p class="sub">Governance, risk and compliance roles for a new graduate with security policy experience and hands-on Microsoft Entra and Microsoft 365 tenant work.</p>
   </header>
 
   <div class="profile" aria-label="Your profile">
-    <span class="chip">Recent graduate</span><span class="chip">Microsoft Entra ID</span><span class="chip">M365 tenants</span><span class="chip">Governance &amp; policy</span><span class="chip">Ireland · Dublin / remote</span>
+    <span class="chip">Recent graduate</span><span class="chip">GRC focus</span><span class="chip">Governance &amp; policy</span><span class="chip">Microsoft Entra ID</span><span class="chip">M365 tenants</span><span class="chip">Ireland · Dublin / remote</span>
   </div>
 
   <nav class="tabs" role="tablist">
@@ -85,18 +85,19 @@ textarea{width:100%;min-height:120px;font:inherit;font-size:.92rem;border:1px so
     <div class="card">
       <div class="search">
         <select id="q" aria-label="Search">
+          <option>GRC analyst</option>
+          <option>governance risk compliance</option>
+          <option>IT risk analyst</option>
+          <option>third party risk analyst</option>
+          <option>data protection GDPR</option>
+          <option>information security compliance</option>
+          <option>compliance analyst graduate</option>
           <option>junior cyber security analyst</option>
-          <option>graduate cyber security</option>
-          <option>security operations analyst</option>
-          <option>identity and access management graduate</option>
-          <option>Microsoft 365 administrator Entra</option>
-          <option>IT risk compliance analyst</option>
-          <option>information security graduate programme</option>
-          <option>cyber security analyst remote</option>
+          <option>GRC analyst remote</option>
         </select>
         <button class="btn primary" id="refresh">Search Indeed live</button>
       </div>
-      <p class="status" id="live-status">Showing the shortlist picked on 31 Oct 2026. Tap "Search Indeed live" for today's listings.</p>
+      <p class="status" id="live-status">Showing the GRC shortlist picked on 1 Nov 2026. Tap "Search Indeed live" for today's listings.</p>
     </div>
     <div id="live" hidden></div>
     <div id="shortlist" style="display:grid;gap:12px"></div>
@@ -138,45 +139,45 @@ textarea{width:100%;min-height:120px;font:inherit;font-size:.92rem;border:1px so
 </div>
 
 <script>
-const DEFAULT_CV = `Recent graduate seeking an entry-level cybersecurity role in Ireland.
+const DEFAULT_CV = `Recent graduate seeking an entry-level cybersecurity GRC (governance, risk and compliance) role in Ireland.
 Hands-on experience administering Microsoft Entra ID (users, groups, roles, Conditional Access, MFA) and Microsoft 365 tenants.
 Experience with security governance and policy: writing and reviewing policies, access reviews, compliance controls.
 No full-time industry experience yet.`;
 
 const SHORTLIST = [
- {tier:"strong",title:"Vhi IT Graduate – Identity and Access Management Team",company:"Vhi",loc:"Dublin",posted:"1 Oct 2026",url:"https://to.indeed.com/aarblnyhh2f9",
-  why:"Two-year graduate programme in IAM. Your Entra ID work is exactly the identity experience they ask for."},
- {tier:"strong",title:"Junior Security Analyst",company:"Forvis Mazars",loc:"Dublin 2",posted:"22 Oct 2026",url:"https://to.indeed.com/aajvpncmqlvm",
-  why:"Explicitly for recent graduates. SIEM, EDR and cloud-portal monitoring; any IT or cyber degree accepted."},
- {tier:"strong",title:"MDR Associate Analyst (Night Shift, remote)",company:"ThreatDown",loc:"Cork / remote Ireland",posted:"5 Oct 2026",url:"https://to.indeed.com/aazywlhbkjxb",
-  why:"€55,000. Bachelor's degree is enough. Associate-level SOC role, 5pm–1am weekdays."},
- {tier:"apply",title:"RSM Ireland 2027 Graduate Opportunities",company:"RSM",loc:"Dublin",posted:"26 Aug 2026",url:"https://to.indeed.com/aalwdxzjjkwh",
-  why:"Graduate intake that includes risk advisory and technology risk tracks, where governance and policy experience fits."},
- {tier:"apply",title:"Risk & Compliance Intern",company:"Mercury Engineering",loc:"Dublin",posted:"6 Oct 2026",url:"https://to.indeed.com/aahl92xftj6d",
-  why:"Internship that builds on your governance and policy background. A good way into GRC."},
- {tier:"apply",title:"IT Labs Graduate Programme 2027",company:"Ryanair",loc:"Swords, Dublin",posted:"25 Sep 2026",url:"https://to.indeed.com/aaddvzhjkk9z",
-  why:"Broad IT graduate programme; ask about rotations into security."},
- {tier:"apply",title:"Analyst I, Information Technology",company:"IPS – Integrated Project Services",loc:"Dublin 4",posted:"15 Oct 2026",url:"https://to.indeed.com/aad86s4qfwy6",
-  why:"Entry-grade IT analyst role. M365 and Entra admin skills transfer directly."},
- {tier:"apply",title:"GSOC Analyst",company:"Crisis24",loc:"Dublin",posted:"2 Oct 2026",url:"https://to.indeed.com/aakt8pyf68br",
-  why:"Global security operations centre. Mostly physical and risk monitoring, but a common first step into security operations."},
- {tier:"stretch",title:"DLP Analyst",company:"Primark",loc:"Dublin 1 (hybrid)",posted:"23 Oct 2026",url:"https://to.indeed.com/aaz4fsddbzxd",
-  why:"Asks for DLP experience. Your policy and M365 background is relevant; mention any Purview exposure."},
- {tier:"stretch",title:"Security Operations Analyst – Ireland",company:"Huntress",loc:"Remote Ireland",posted:"20 Oct 2026",url:"https://to.indeed.com/aazzhn629hhr",
-  why:"€70–90k. Asks for 2+ years of SOC experience, but includes M365 investigations. Apply if you have TryHackMe or CTF work to show."},
- {tier:"stretch",title:"Azure & Modern Workplace Engineer",company:"Innovate Business Technology",loc:"Gorey, Wexford",posted:"29 Oct 2026",url:"https://to.indeed.com/aavrddby47yp",
-  why:"Entra and Intune heavy. Likely wants some experience, but your tenant admin work matches the stack."},
+ {tier:"strong",title:"Privacy and AI Governance Associate Consultant",company:"Forvis Mazars",loc:"Dublin 2",posted:"1 Oct 2026",url:"https://to.indeed.com/aahpxmk6q6vs",
+  why:"Junior role that says it suits someone starting their career. GDPR assessments, outsourced DPO work and AI Act governance. Your policy work is direct evidence."},
+ {tier:"strong",title:"Risk & Compliance Intern",company:"Mercury Engineering",loc:"Dublin",posted:"6 Oct 2026",url:"https://to.indeed.com/aagtzy9fwbnr",
+  why:"Internship built for someone with no full-time experience. A fast way to get a GRC line on your CV."},
+ {tier:"strong",title:"RSM Ireland 2027 Graduate Opportunities",company:"RSM",loc:"Dublin",posted:"26 Aug 2026",url:"https://to.indeed.com/aamtvbw6br24",
+  why:"Graduate intake. Ask for the risk advisory or technology risk stream, where policy and controls work is the day job."},
+ {tier:"apply",title:"Ethics and Compliance Associate",company:"Kerry",loc:"Naas, Kildare",posted:"9 Oct 2026",url:"https://to.indeed.com/aapwfqwblgwf",
+  why:"Policy governance, risk assessments, registers and audit readiness. Asks for some compliance or governance experience; lead with your policy work."},
+ {tier:"apply",title:"Security and Compliance Administrator",company:"Sky Handling Partner",loc:"Dublin Airport",posted:"22 May 2026",url:"https://to.indeed.com/aamjg9pyfvdd",
+  why:"Leaving Cert minimum. GDPR, audits and security compliance records in aviation. Posted in May, so check it is still open."},
+ {tier:"stretch",title:"Third Party Risk Management Compliance Analyst",company:"The Fidelis Partnership",loc:"Dublin (on site, fixed term)",posted:"29 Oct 2026",url:"https://to.indeed.com/aadd2v4sr7ng",
+  why:"Reviewing suppliers' ISO certs, SOC reports and security policies under DORA. Wants prior risk or compliance experience. Closes 30 Nov 2026."},
+ {tier:"stretch",title:"DLP Analyst",company:"Primark",loc:"Dublin 1 (hybrid)",posted:"23 Oct 2026",url:"https://to.indeed.com/aal8sfb8l8wr",
+  why:"Data protection policy, data classification and compliance reporting. Asks for DLP experience; mention any Microsoft Purview exposure."},
+ {tier:"stretch",title:"Compliance Analyst (Fixed Term)",company:"Intercontinental Exchange",loc:"Dublin 2",posted:"29 Oct 2026",url:"https://to.indeed.com/aacjllg6pdvj",
+  why:"Policy drafting and control testing for financial regulation. Asks for 3 years in compliance, so a long shot."},
+ {tier:"other",title:"Vhi IT Graduate – Identity and Access Management Team",company:"Vhi",loc:"Dublin",posted:"1 Oct 2026",url:"https://to.indeed.com/aarblnyhh2f9",
+  why:"Not GRC, but the best match for your Entra ID experience. Two-year graduate programme."},
+ {tier:"other",title:"Junior Security Analyst",company:"Forvis Mazars",loc:"Dublin 2",posted:"22 Oct 2026",url:"https://to.indeed.com/aajvpncmqlvm",
+  why:"Graduate security monitoring role at the same firm as the privacy role above."},
+ {tier:"other",title:"Cyber Security Operations Center Early Career Placement Program 2027",company:"State Street",loc:"Kilkenny",posted:"31 Oct 2026",url:"https://to.indeed.com/aapw99ntsz2c",
+  why:"Early-career security programme at a regulated bank, which often leads into risk and controls teams."},
 ];
-const TIER = {strong:["Strong fit","t-strong"],apply:["Worth applying","t-apply"],stretch:["Stretch","t-stretch"]};
+const TIER = {strong:["Strong fit","t-strong"],apply:["Worth applying","t-apply"],stretch:["Stretch","t-stretch"],other:["Other security roles","t-apply"]};
 
 const LI_GEO="104738515";
 const LI = [
- ["Junior cyber security","junior cyber security"],
- ["Graduate security programmes","graduate security"],
- ["SOC analyst","SOC analyst"],
- ["Identity & access (Entra)","identity access management Entra"],
- ["GRC / governance & compliance","GRC analyst"],
- ["Microsoft 365 security","Microsoft 365 security"],
+ ["GRC analyst","GRC analyst"],
+ ["IT risk & controls","IT risk analyst"],
+ ["Third-party / vendor risk","third party risk"],
+ ["Data protection & GDPR","data protection GDPR"],
+ ["Compliance graduate","compliance graduate"],
+ ["ISO 27001 / information security","ISO 27001 information security"],
 ];
 
 const $=s=>document.querySelector(s);
@@ -208,7 +209,7 @@ async function askClaude(prompt,out){
   catch(e){ out.textContent = e?.code==="rate_limited" ? "Too many requests just now. Try again in a minute." : e?.code==="not_granted" ? "Claude access was declined for this page." : "Claude couldn't answer: "+(e?.message||"unknown error"); }
 }
 function fitPrompt(jobText){
-  return `You are a careers adviser for the Irish cybersecurity job market. Assess fit for an entry-level candidate.
+  return `You are a careers adviser for the Irish cybersecurity governance, risk and compliance (GRC) job market. Assess fit for an entry-level GRC candidate. Where relevant, name frameworks Irish employers ask for (ISO 27001, NIST CSF, GDPR, NIS2, DORA).
 
 CANDIDATE:
 ${cvText}
@@ -262,7 +263,7 @@ function jobCard(j,opts={}){
 }
 function renderShortlist(){
   const box=$("#shortlist"); box.replaceChildren();
-  for(const t of ["strong","apply","stretch"]){
+  for(const t of ["strong","apply","stretch","other"]){
     const h=document.createElement("h2"); h.innerHTML=`<span class="tier ${TIER[t][1]}">${TIER[t][0]}</span>`; box.append(h);
     SHORTLIST.filter(j=>j.tier===t).forEach(j=>box.append(jobCard(j)));
   }
